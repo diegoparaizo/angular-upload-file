@@ -1,0 +1,17 @@
+.md-toolbar-tools h1 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: inherit;
+}
+
+.mat-mdc-form-field {
+    width: 500px !important;
+}
+
+.mat-mdc-nav-list {
+    width: 500px !important;
+}
+
+.progress-bar {
+    width: 500px !important;
+}

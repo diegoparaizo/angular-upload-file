@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <div class="md-toolbar-tools">
+    <h1></h1>
+  </div>
+</mat-toolbar>
+
+<p>
+  <mat-form-field>
+    <mat-label *ngIf="selectedFiles; then fileName; else newFile"></mat-label>
+    <ng-template #newFile>
+        <mat-label>Choose file</mat-label>
+    </ng-template>
+    <ng-template #fileName>
+      <mat-label>{{nameFile}}</mat-label>
+    </ng-template>
+    <input matInput disabled>
+    <button mat-icon-button matSuffix (click)="fileInput.click()">
+        <mat-icon>attach_file</mat-icon>
+    </button>
+    <button mat-icon-button matSuffix (click)="uploadFiles()">
+        <mat-icon>cloud_upload</mat-icon>
+    </button>
+    <input hidden (change)="selectFiles($event)" #fileInput type="file" multiple="multiple">
+  </mat-form-field>
+</p>
+
+<p [hidden]="hideProgressBar">
+  <mat-toolbar class="progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-toolbar>
+</p>
+
+<p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="searchText" placeholder="Search" autocomplete="off" type="text">
+  </mat-form-field>
+</p>
+
+<mat-nav-list>
+  <div mat-subheader>List Files:</div>
+  <a mat-list-item *ngFor="let file of fileInfos | async | filter: searchText;">
+    <mat-icon matListItemIcon>insert_drive_file</mat-icon>
+    <div matListItemTitle>{{ file.name }}</div>
+  </a>
+</mat-nav-list>
